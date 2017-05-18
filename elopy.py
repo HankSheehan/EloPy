@@ -36,16 +36,23 @@ class Implementation:
                 return True
         return False
 
+    def __getPlayer(self, name):
+        """
+        TODO
+        @param name - TODO
+        """
+        #TODO
+
     def addResults(self, name1, name2):
         """
         Should be called after a game is played.
         @param name1 - name of the first player.
         @param name2 - name of the second player.
         """
-        expected1 = ( 1+10**( ( R2-R1 )/400 ) ) ** -1
-        expected2 = ( 1+10**( ( R1-R2 )/400 ) ) ** -1
+        expected1 = #new rating formula
+        expected2 = #new rating formula
         rating1 = #new rating formula
-        rating2 = #new rating forula
+        rating2 = #new rating formula
 
 class _Player:
     """
@@ -60,3 +67,11 @@ class _Player:
         """
         self.name = name
         self.rating = rating
+
+    def compareRating(self, opponent):
+        """
+        Compares the two ratings of the this player and the opponent.
+        @param opponenet - the player to compare against.
+        @returns - The expected score between the two players.
+        """
+        return ( 1+10**( ( opponent.rating-self.rating )/400 ) ) ** -1
