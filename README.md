@@ -1,6 +1,6 @@
 # EloPy
 
-A python library for the Elo Rating System.
+A python library for the Elo Rating System. Right now it only supports 1 vs 1 games.
 
 
 ## What is the Elo Rating System?
