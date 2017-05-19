@@ -25,6 +25,7 @@ Supposing Player A was expected to score E<sub>A</sub> points but actually score
 
 ![alt text](https://wikimedia.org/api/rest_v1/media/math/render/svg/09a11111b433582eccbb22c740486264549d1129)
 
+where K is the K value specified in the implementation.
 
 ## Syntax when using EloPy
 TODO
