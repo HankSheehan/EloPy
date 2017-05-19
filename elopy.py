@@ -1,6 +1,6 @@
 """
 Created 5-18-17
-All of the classes for EloPy. The users should only interact with the Implementation class
+All of the classes for EloPy. The users should only interact with the Implementation class.
 @author - Hank Hang Kai Sheehan
 """
 
@@ -17,13 +17,16 @@ class Implementation:
         self.base_rating = base_rating
         self.players = []
 
-    def newPlayer(self, name, rating=base_rating):
+    def newPlayer(self, name, rating=None):
         """
         Adds a new player to the implementation.
         @param name - The name to identify a specific player.
         @param rating - The player's rating.
         """
-        self.players = Player(name=name,rating=rating)
+        if rating == None:
+            rating = self.base_rating
+
+        self.players.append(_Player(name=name,rating=rating))
 
     def contains(self, name):
         """
@@ -38,10 +41,14 @@ class Implementation:
 
     def __getPlayer(self, name):
         """
-        TODO
-        @param name - TODO
+        Returns the player in the implementation with the given name.
+        @param name - name of the player to return.
+        @return - the player with the given name.
         """
-        #TODO
+        for player in self.players:
+            if player.name == name:
+                return player
+        return None
 
     def addResults(self, name1, name2):
         """
@@ -49,10 +56,27 @@ class Implementation:
         @param name1 - name of the first player.
         @param name2 - name of the second player.
         """
-        expected1 = #new rating formula
-        expected2 = #new rating formula
-        rating1 = #new rating formula
-        rating2 = #new rating formula
+        expected1 = self.__getPlayer(name1).compareRating(self.__getPlayer(name2))
+        expected2 = self.__getPlayer(name2).compareRating(self.__getPlayer(name1))
+        rating1 = None #new rating formula
+        rating2 = None #new rating formula
+	print expected1,expected2
+
+    def getPlayerRating(self, name):
+        """
+        Returns the rating of the player with the given name.
+        @param name - name of the player.
+        @return - the rating of the player with the given name.
+        """
+        player = self.getPlayer(name)
+        return player.rating
+
+    def getPlayerList(self):
+        """
+        Returns this implementation's player list.
+        @return - the list of all player objects in the implementation.
+        """
+        return self.players
 
 class _Player:
     """
