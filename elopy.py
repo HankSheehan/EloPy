@@ -57,6 +57,13 @@ class Implementation:
 
         self.players.append(_Player(name=name,rating=rating))
 
+    def removePlayer(self, name):
+        """
+        Adds a new player to the implementation.
+        @param name - The name to identify a specific player.
+        """
+        self.__getPlayerList().remove(self.__getPlayer(name))
+
 
     def recordMatch(self, name1, name2, winner=None, draw=False):
         """

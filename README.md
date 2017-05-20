@@ -36,15 +36,20 @@ from elopy import *
 i = Implementation()
 ```
 
-#### Adding players
+#### Adding and removing players
 ```python
 i.newPlayer("Hank") #default rating is 1000
 i.newPlayer("Bill",rating=900)
 
 print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+
+i.removePlayer("Hank")
+
+print i.getRatingList()
 ```
 ```shell
 1000 900
+900
 ```
 
 #### Recording a match

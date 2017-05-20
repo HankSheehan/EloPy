@@ -18,3 +18,7 @@ print i.getRatingList()
 i.recordMatch("Hank","Bill",draw=True)
 
 print i.getRatingList()
+
+i.removePlayer("Hank")
+
+print i.getRatingList()
