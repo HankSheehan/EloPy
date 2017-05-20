@@ -28,4 +28,41 @@ Supposing Player A was expected to score E<sub>A</sub> points but actually score
 Right now the K factor is found by the number of player multiplied by 42 as a constant. Working on custom K factors.
 
 ## Syntax when using EloPy
-TODO
+
+#### Creating your own implementation
+```python
+from elopy import *
+
+i = Implementation()
+```
+
+#### Adding players
+```python
+i.newPlayer("Hank") #default rating is 1000
+i.newPlayer("Bill",rating=900)
+
+print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+```
+```shell
+1000 900
+```
+
+#### Recording a match
+```python
+i.recordMatch("Hank","Bill",winner="Hank")
+
+print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+
+i.recordMatch("Hank","Bill",winner="Bill")
+
+print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+
+i.recordMatch("Hank","Bill",draw=True)
+
+print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+```
+```shell
+1007.63636364 858.0
+948.588723954 917.047639682
+944.78629748 920.850066156
+```
