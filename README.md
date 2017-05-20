@@ -51,18 +51,18 @@ print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
 ```python
 i.recordMatch("Hank","Bill",winner="Hank")
 
-print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+print i.getRatingList()
 
 i.recordMatch("Hank","Bill",winner="Bill")
 
-print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+print i.getRatingList()
 
 i.recordMatch("Hank","Bill",draw=True)
 
-print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+print i.getRatingList()
 ```
 ```shell
-1007.63636364 858.0
-948.588723954 917.047639682
-944.78629748 920.850066156
+[('Hank', 1007.6363636363636), ('Bill', 858.0)]
+[('Hank', 948.5887239540937), ('Bill', 917.04763968227)]
+[('Hank', 944.7862974803486), ('Bill', 920.850066156015)]
 ```
