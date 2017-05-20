@@ -3,12 +3,18 @@ from elopy import *
 i = Implementation()
 
 i.newPlayer("Hank")
-i.newPlayer("Bill",900)
+i.newPlayer("Bill",rating=900)
 
 print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
 
-i.addResults("Hank","Bill","Hank")
+i.recordMatch("Hank","Bill",winner="Hank")
 
-print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
+print i.getRatingList()
 
+i.recordMatch("Hank","Bill",winner="Bill")
 
+print i.getRatingList()
+
+i.recordMatch("Hank","Bill",draw=True)
+
+print i.getRatingList()

@@ -17,27 +17,12 @@ class Implementation:
         self.base_rating = base_rating
         self.players = []
 
-    def newPlayer(self, name, rating=None):
+    def __getPlayerList(self):
         """
-        Adds a new player to the implementation.
-        @param name - The name to identify a specific player.
-        @param rating - The player's rating.
+        Returns this implementation's player list.
+        @return - the list of all player objects in the implementation.
         """
-        if rating == None:
-            rating = self.base_rating
-
-        self.players.append(_Player(name=name,rating=rating))
-
-    def contains(self, name):
-        """
-        Returns true if this object contains a player with the given name.
-        Otherwise returns false.
-        @param name - name to check for.
-        """
-        for player in self.players:
-            if player.name == name:
-                return True
-        return False
+        return self.players
 
     def __getPlayer(self, name):
         """
@@ -50,17 +35,60 @@ class Implementation:
                 return player
         return None
 
-    def addResults(self, name1, name2):
+    def contains(self, name):
+        """
+        Returns true if this object contains a player with the given name.
+        Otherwise returns false.
+        @param name - name to check for.
+        """
+        for player in self.players:
+            if player.name == name:
+                return True
+        return False
+
+    def newPlayer(self, name, rating=None):
+        """
+        Adds a new player to the implementation.
+        @param name - The name to identify a specific player.
+        @param rating - The player's rating.
+        """
+        if rating == None:
+            rating = self.base_rating
+
+        self.players.append(_Player(name=name,rating=rating))
+
+
+    def recordMatch(self, name1, name2, winner=None, draw=False):
         """
         Should be called after a game is played.
         @param name1 - name of the first player.
         @param name2 - name of the second player.
         """
-        expected1 = self.__getPlayer(name1).compareRating(self.__getPlayer(name2))
-        expected2 = self.__getPlayer(name2).compareRating(self.__getPlayer(name1))
-        rating1 = None #new rating formula
-        rating2 = None #new rating formula
-	print expected1,expected2
+        player1 = self.__getPlayer(name1)
+        player2 = self.__getPlayer(name2)
+
+        expected1 = player1.compareRating(player2)
+        expected2 = player2.compareRating(player1)
+        
+        k = len(self.__getPlayerList()) * 42
+
+        rating1 = player1.rating
+        rating2 = player2.rating
+
+        if draw:
+            score1 = 0.5
+            score2 = 0.5
+        elif winner == name1:
+            score1 = 1.0
+            score2 = 0.0
+        elif winner == name2:
+            score1 = 0.0
+            score2 = 1.0
+        else:
+            raise InputError('One of the names must be the winner or draw much be True')
+
+        player1.rating = rating1 + k * (score1 - expected1)
+        player2.rating = rating2 + k * (score2 - expected2)
 
     def getPlayerRating(self, name):
         """
@@ -68,15 +96,18 @@ class Implementation:
         @param name - name of the player.
         @return - the rating of the player with the given name.
         """
-        player = self.getPlayer(name)
+        player = self.__getPlayer(name)
         return player.rating
 
-    def getPlayerList(self):
+    def getRatingList(self):
         """
-        Returns this implementation's player list.
-        @return - the list of all player objects in the implementation.
+        Returns a list of tuples in the form of ({name},{rating})
+        @return - the list of tuples
         """
-        return self.players
+        lst = []
+        for player in self.__getPlayerList():
+            lst.append((player.name,player.rating))
+        return lst
 
 class _Player:
     """
