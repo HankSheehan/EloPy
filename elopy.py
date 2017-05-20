@@ -46,7 +46,7 @@ class Implementation:
                 return True
         return False
 
-    def newPlayer(self, name, rating=None):
+    def addPlayer(self, name, rating=None):
         """
         Adds a new player to the implementation.
         @param name - The name to identify a specific player.
