@@ -2,8 +2,8 @@ from elopy import *
 
 i = Implementation()
 
-i.newPlayer("Hank")
-i.newPlayer("Bill",rating=900)
+i.addPlayer("Hank")
+i.addPlayer("Bill",rating=900)
 
 print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
 
