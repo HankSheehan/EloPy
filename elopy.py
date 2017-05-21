@@ -24,7 +24,7 @@ class Implementation:
         """
         return self.players
 
-    def __getPlayer(self, name):
+    def getPlayer(self, name):
         """
         Returns the player in the implementation with the given name.
         @param name - name of the player to return.
@@ -62,7 +62,7 @@ class Implementation:
         Adds a new player to the implementation.
         @param name - The name to identify a specific player.
         """
-        self.__getPlayerList().remove(self.__getPlayer(name))
+        self.__getPlayerList().remove(self.getPlayer(name))
 
 
     def recordMatch(self, name1, name2, winner=None, draw=False):
@@ -71,8 +71,8 @@ class Implementation:
         @param name1 - name of the first player.
         @param name2 - name of the second player.
         """
-        player1 = self.__getPlayer(name1)
-        player2 = self.__getPlayer(name2)
+        player1 = self.getPlayer(name1)
+        player2 = self.getPlayer(name2)
 
         expected1 = player1.compareRating(player2)
         expected2 = player2.compareRating(player1)
@@ -103,7 +103,7 @@ class Implementation:
         @param name - name of the player.
         @return - the rating of the player with the given name.
         """
-        player = self.__getPlayer(name)
+        player = self.getPlayer(name)
         return player.rating
 
     def getRatingList(self):
