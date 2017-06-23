@@ -92,7 +92,7 @@ class Implementation:
             score1 = 0.0
             score2 = 1.0
         else:
-            raise InputError('One of the names must be the winner or draw much be True')
+            raise InputError('One of the names must be the winner or draw must be True')
 
         player1.rating = rating1 + k * (score1 - expected1)
         player2.rating = rating2 + k * (score2 - expected2)
@@ -133,7 +133,7 @@ class _Player:
     def compareRating(self, opponent):
         """
         Compares the two ratings of the this player and the opponent.
-        @param opponenet - the player to compare against.
+        @param opponent - the player to compare against.
         @returns - The expected score between the two players.
         """
-        return ( 1+10**( ( opponent.rating-self.rating )/400 ) ) ** -1
+        return ( 1+10**( ( opponent.rating-self.rating )/400.0 ) ) ** -1
