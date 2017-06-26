@@ -38,8 +38,8 @@ i = Implementation()
 
 #### Adding and removing players
 ```python
-i.newPlayer("Hank") #default rating is 1000
-i.newPlayer("Bill",rating=900)
+i.addPlayer("Hank") #default ranking is 1000
+i.addPlayer("Bill",rating=900)
 
 print i.getPlayerRating("Hank"), i.getPlayerRating("Bill")
 
@@ -67,7 +67,7 @@ i.recordMatch("Hank","Bill",draw=True)
 print i.getRatingList()
 ```
 ```shell
-[('Hank', 1007.6363636363636), ('Bill', 858.0)]
-[('Hank', 948.5887239540937), ('Bill', 917.04763968227)]
-[('Hank', 944.7862974803486), ('Bill', 920.850066156015)]
+[('Hank', 1030.2345400165577), ('Bill', 869.7654599834424)]
+[('Hank', 970.1071401496504), ('Bill', 929.8928598503497)]
+[('Hank', 965.2674016281943), ('Bill', 934.7325983718058)]
 ```
