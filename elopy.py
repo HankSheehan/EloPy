@@ -94,8 +94,19 @@ class Implementation:
         else:
             raise InputError('One of the names must be the winner or draw must be True')
 
-        player1.rating = rating1 + k * (score1 - expected1)
-        player2.rating = rating2 + k * (score2 - expected2)
+        newRating1 = rating1 + k * (score1 - expected1)
+        newRating2 = rating2 + k * (score2 - expected2)
+
+        if newRating1 < 0:
+            newRating1 = 0
+            newRating2 = rating2 - rating1
+
+        elif newRating2 < 0:
+            newRating2 = 0
+            newRating1 = rating1 - rating2
+
+        player1.rating = newRating1
+        player2.rating = newRating2
 
     def getPlayerRating(self, name):
         """
