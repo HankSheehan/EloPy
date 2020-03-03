@@ -3,6 +3,7 @@ from elopy import *
 i = Implementation()
 
 i.addPlayer("Hank")
+i.addPlayer("Hank")
 i.addPlayer("Bill",rating=900)
 
 print(i.getPlayerRating("Hank"), i.getPlayerRating("Bill"))
