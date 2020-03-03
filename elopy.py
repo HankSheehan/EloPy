@@ -55,6 +55,11 @@ class Implementation:
         if rating == None:
             rating = self.base_rating
 
+        #Check for duplicates with exact same name
+        for p in self.players:
+            if name == p.name:
+                return
+
         self.players.append(_Player(name=name,rating=rating))
 
     def removePlayer(self, name):
