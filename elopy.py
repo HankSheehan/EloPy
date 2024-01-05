@@ -35,6 +35,13 @@ class Implementation:
                 return player
         return None
 
+    def getPlayers(self):
+        """
+        Return all the players in the list
+        """
+        for player in self.players:
+            return player
+
     def contains(self, name):
         """
         Returns true if this object contains a player with the given name.
@@ -56,6 +63,15 @@ class Implementation:
             rating = self.base_rating
 
         self.players.append(_Player(name=name,rating=rating))
+
+    def addPlayers(self, players, rating=None):
+        """
+        Add a list of players to the implementation class
+        @param players - the players list
+        @param rating - the global rating for all players
+        """
+        for player in players:
+            self.addPlayer(player, rating)
 
     def removePlayer(self, name):
         """
@@ -135,8 +151,8 @@ class _Player:
     def __init__(self, name, rating):
         """
         Runs at initialization of class object.
-        @param name - TODO
-        @param rating - TODO
+        @param name - player name
+        @param rating - player rating
         """
         self.name = name
         self.rating = rating
