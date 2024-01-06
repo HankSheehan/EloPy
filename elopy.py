@@ -35,12 +35,11 @@ class Implementation:
                 return player
         return None
 
-    def getPlayers(self):
+    def getPlayers(self, players):
         """
         Return all the players in the list
         """
-        for player in self.players:
-            return player
+        return " ,".join(players)
 
     def contains(self, name):
         """
@@ -87,42 +86,49 @@ class Implementation:
         @param name1 - name of the first player.
         @param name2 - name of the second player.
         """
-        player1 = self.getPlayer(name1)
-        player2 = self.getPlayer(name2)
+        players = []
+        for player in self.players:
+            players.append(player.name)
 
-        expected1 = player1.compareRating(player2)
-        expected2 = player2.compareRating(player1)
-        
-        k = len(self.__getPlayerList()) * 42
+        if(name1 in players and name2 in players):
+            player1 = self.getPlayer(name1)
+            player2 = self.getPlayer(name2)
 
-        rating1 = player1.rating
-        rating2 = player2.rating
+            expected1 = player1.compareRating(player2)
+            expected2 = player2.compareRating(player1)
 
-        if draw:
-            score1 = 0.5
-            score2 = 0.5
-        elif winner == name1:
-            score1 = 1.0
-            score2 = 0.0
-        elif winner == name2:
-            score1 = 0.0
-            score2 = 1.0
+            k = len(self.__getPlayerList()) * 42
+
+            rating1 = player1.rating
+            rating2 = player2.rating
+
+            if draw:
+                score1 = 0.5
+                score2 = 0.5
+            elif winner == name1:
+                score1 = 1.0
+                score2 = 0.0
+            elif winner == name2:
+                score1 = 0.0
+                score2 = 1.0
+            else:
+                raise Exception('One of the names must be the winner or draw must be True')
+
+            newRating1 = rating1 + k * (score1 - expected1)
+            newRating2 = rating2 + k * (score2 - expected2)
+
+            if newRating1 < 0:
+                newRating1 = 0
+                newRating2 = rating2 - rating1
+
+            elif newRating2 < 0:
+                newRating2 = 0
+                newRating1 = rating1 - rating2
+
+            player1.rating = newRating1
+            player2.rating = newRating2
         else:
-            raise InputError('One of the names must be the winner or draw must be True')
-
-        newRating1 = rating1 + k * (score1 - expected1)
-        newRating2 = rating2 + k * (score2 - expected2)
-
-        if newRating1 < 0:
-            newRating1 = 0
-            newRating2 = rating2 - rating1
-
-        elif newRating2 < 0:
-            newRating2 = 0
-            newRating1 = rating1 - rating2
-
-        player1.rating = newRating1
-        player2.rating = newRating2
+            raise Exception("One or more player you provide don't exist in this Elo league.")
 
     def getPlayerRating(self, name):
         """
@@ -140,8 +146,8 @@ class Implementation:
         """
         lst = []
         for player in self.__getPlayerList():
-            lst.append((player.name,player.rating))
-        return lst
+            lst.append((player.name,round(player.rating, 2)))
+        return sorted(lst)
 
 class _Player:
     """
@@ -164,3 +170,6 @@ class _Player:
         @returns - The expected score between the two players.
         """
         return ( 1+10**( ( opponent.rating-self.rating )/400.0 ) ) ** -1
+
+    def __str__(self):
+        return "{} ({})".format(self.name, round(self.rating, 2))
