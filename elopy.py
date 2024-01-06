@@ -4,6 +4,7 @@ All of the classes for EloPy. The users should only interact with the Implementa
 @author - Hank Hang Kai Sheehan
 """
 
+
 class Implementation:
     """
     A class that represents an implementation of the Elo Rating System
@@ -61,7 +62,7 @@ class Implementation:
         if rating == None:
             rating = self.base_rating
 
-        self.players.append(_Player(name=name,rating=rating))
+        self.players.append(_Player(name=name, rating=rating))
 
     def addPlayers(self, players, rating=None):
         """
@@ -79,7 +80,6 @@ class Implementation:
         """
         self.__getPlayerList().remove(self.getPlayer(name))
 
-
     def recordMatch(self, name1, name2, winner=None, draw=False):
         """
         Should be called after a game is played.
@@ -90,7 +90,7 @@ class Implementation:
         for player in self.players:
             players.append(player.name)
 
-        if(name1 in players and name2 in players):
+        if (name1 in players and name2 in players):
             player1 = self.getPlayer(name1)
             player2 = self.getPlayer(name2)
 
@@ -146,8 +146,9 @@ class Implementation:
         """
         lst = []
         for player in self.__getPlayerList():
-            lst.append((player.name,round(player.rating, 2)))
-        return sorted(lst)
+            lst.append((player.name, round(player.rating, 2)))
+        return sorted(lst, key=lambda player: player[1], reverse=True)
+
 
 class _Player:
     """
@@ -169,7 +170,7 @@ class _Player:
         @param opponent - the player to compare against.
         @returns - The expected score between the two players.
         """
-        return ( 1+10**( ( opponent.rating-self.rating )/400.0 ) ) ** -1
+        return (1 + 10 ** ((opponent.rating - self.rating) / 400.0)) ** -1
 
     def __str__(self):
         return "{} ({})".format(self.name, round(self.rating, 2))

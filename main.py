@@ -12,23 +12,16 @@ print(i.getRatingList())
 print(i.getPlayer("Joachim"))
 print(i.getPlayerRating("Joachim"))
 
-i.recordMatch("Joachim", "Julien Lejeune", winner="Joachim")
-print(i.getRatingList())
-i.recordMatch("Joachim", "Julien Lejeune", winner="Joachim")
-print(i.getRatingList())
 
-#
-# i.recordMatch("Hank", "Bill", winner="Bill")
-#
-# print
-# i.getRatingList()
-#
-# i.recordMatch("Hank", "Bill", draw=True)
-#
-# print
-# i.getRatingList()
-#
-# i.removePlayer("Hank")
-#
-# print
-# i.getRatingList()
+"""
+This bunch of data represent the match in the Csv files "MTG-scores" for the period from 28/12/2023 to 03/01/2024
+"""
+i.recordMatch("Joachim", "Julien Lejeune", winner="Joachim")
+i.recordMatch("Joachim", "Christopher", winner="Joachim")
+i.recordMatch("Julien Lejeune", "Gilles", winner="Gilles")
+i.recordMatch("Joachim", "Gilles", winner="Joachim")
+i.recordMatch("Julien Lejeune", "Christopher", winner="Julien Lejeune")
+i.recordMatch("Joachim", "Christopher", winner="Christopher")
+
+
+print(i.getRatingList())
