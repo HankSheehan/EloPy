@@ -14,7 +14,7 @@ print(i.getPlayerRating("Joachim"))
 
 
 """
-This bunch of data represent the match in the Csv files "MTG-scores" for the period from 28/12/2023 to 03/01/2024
+This bunch of data represent the games in the Csv files "MTG-scores" for the period of 28/12/2023 to 03/01/2024
 """
 i.recordMatch("Joachim", "Julien Lejeune", winner="Joachim")
 i.recordMatch("Joachim", "Christopher", winner="Joachim")
